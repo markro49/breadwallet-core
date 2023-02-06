@@ -63,6 +63,7 @@ model {
         }
     }
     components {
+        /*
         sqlite3(NativeLibrarySpec) {
             sources {
                 c {
@@ -82,6 +83,7 @@ model {
                 }
             }
         }
+        */
         corecrypto(NativeLibrarySpec) {
             sources {
                 c {
@@ -98,8 +100,9 @@ model {
                         cCompiler.args "-I$it"
                     }
 
-                    lib library: 'sqlite3', linkage: 'static'
+                    //lib library: 'sqlite3', linkage: 'static'
                 }
+                /*
                 withType(SharedLibraryBinarySpec) {
                     def target = targetPlatform.name
                     def os = targetPlatform.operatingSystem.name
@@ -118,11 +121,13 @@ model {
                     }
                     processResources.dependsOn("copyMainBinaryToLibs${target}")
                 }
+                */
                 withType(StaticLibraryBinarySpec) {
                     buildable = false
                 }
             }
         }
+ /*
         // Add a second target for the test version of the crypto library. This looks like it is
         // needed because we can't change the source set based on build type...
         corecryptoWithTests(NativeLibrarySpec) {
@@ -130,7 +135,7 @@ model {
                 c {
                     source {
                         srcDirs project(':corenative').cppCryptoSrcDirs
-                        include "**/*.c"
+                        //include
                         // note the missing 'exclude' here; we WANT the test source
                     }
                 }
@@ -170,6 +175,7 @@ model {
                 }
             }
         }
+ */
     }
     tasks {
         buildAllExecutables(Task) {
